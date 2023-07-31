@@ -1,0 +1,99 @@
+<?php
+    if (isset($_POST['submit'])) {
+       
+        $fname = $_POST['fname'];
+        $lname = $_POST['lname'];
+        $uname = $_POST['uname'];
+        $pwd = $_POST['pwd'];
+        $gender = $_POST['gender'];
+        $ayear = $_POST['ayear'];
+        $email = $_POST['email'];
+        $pnum = $_POST['pnum'];
+
+        
+        echo "<h2>Registration Details:</h2>";
+        echo "<table border='1' cellpadding='5'>";
+        echo "<tr><td>First Name</td><td>$fname</td></tr>";
+        echo "<tr><td>Last Name</td><td>$lname</td></tr>";
+        echo "<tr><td>User Name</td><td>$uname</td></tr>";
+        echo "<tr><td>Password</td><td>$pwd</td></tr>";
+        echo "<tr><td>Gender</td><td>$gender</td></tr>";
+        echo "<tr><td>Academic Year</td><td>$ayear</td></tr>";
+        echo "<tr><td>Email</td><td>$email</td></tr>";
+        echo "<tr><td>Phone Number</td><td>$pnum</td></tr>";
+        echo "</table>";
+    }
+    ?>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Text</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        .fk {
+            text-align: center;
+        }
+
+        
+        form {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 300px;
+            margin: 0 auto;
+            background-color: aquamarine;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <form action="text.php" method="post">
+        <label for="fname">First Name</label>
+        <input placeholder="Enter First Name" id="fname" name="fname" required>
+        <br><br>
+        <label for="lname">Last Name</label>
+        <input placeholder="Enter Last Name" id="lname" name="lname" required>
+        <br><br>
+        <label for="uname">User Name</label>
+        <input placeholder="Enter User Name" id="uname" name="uname" required>
+        <br><br>
+        <label for="pwd">Password</label>
+        <input type="text" id="pwd" name="pwd" required>
+        <br><br>
+        <label for="gender">Gender</label><br>
+        <input type="radio" id="gender" name="gender" value="female" required>
+        <label for="f">Female</label>
+        <input type="radio" id="gender" name="gender" value="male" required>
+        <label for="m">Male</label>
+        <br><br>
+        <label for="ayear">Academic Year</label><br>
+        <select id="ayear" name="ayear" required>
+            <option value="1y">1st Year</option>
+            <option value="2y">2nd Year</option>
+            <option value="3y">3rd Year</option>
+            <option value="4y">4th Year</option>
+        </select>
+        <br><br>
+        <label for="email">Email</label>
+        <input placeholder="Enter Email" id="email" name="email" required>
+        <br><br>
+        <label for="pnum">Phone Number</label>
+        <input placeholder="Enter Phone" id="pnum" name="pnum" required>
+        <br><br>
+        <input type="button" value="Submit" class="fk">
+    </form>
+</body>
+</html>
