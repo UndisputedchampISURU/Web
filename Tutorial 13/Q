@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+</head>
+<body>
+
+    <h1>Student Registration</h1>
+    <form action="process.php" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br><br>
+
+        <input type="submit" value="Register">
+    </form>
+
+</body>
+</html>
+
+
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    // Database connection
+    $servername = "localhost";
+    $username = "your_mysql_username";
+    $password_db = "your_mysql_password";
+    $database = "university";
+
+    $conn = new mysqli($servername, $username, $password_db, $database);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO students (name, email, password) VALUES ('$name', '$email', '$password')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Student data stored successfully.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
+?>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students Details</title>
+</head>
+<body>
+
+    <h1>Students Details</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+        </tr>
+
+        <?php
+        // Database connection
+        $servername = "localhost";
+        $username = "your_mysql_username";
+        $password_db = "your_mysql_password";
+        $database = "university";
+
+        $conn = new mysqli($servername, $username, $password_db, $database);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT * FROM students";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["id"] . "</td>";
+                echo "<td>" . $row["name"] . "</td>";
+                echo "<td>" . $row["email"] . "</td>";
+                echo "<td>" . $row["password"] . "</td>";
+                echo "</tr>";
+            }
+        }
+
+        $conn->close();
+        ?>
+    </table>
+
+</body>
+</html>
+
+
+
+
+CREATE DATABASE IF NOT EXISTS university;
+USE university;
+
+CREATE TABLE IF NOT EXISTS students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL
+);
